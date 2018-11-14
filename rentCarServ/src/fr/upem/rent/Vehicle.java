@@ -1,15 +1,18 @@
 package fr.upem.rent;
 
 import java.io.Serializable;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 
 public class Vehicle implements Serializable{
+	
 	private final long id;
 	private final String model;
 	private final String brand;
 	private int nbRented;
 	private final double price;
-	private final int ageRequired;	
-
+	private final int ageRequired;
 
 	public Vehicle(long id, String model, String brand, int nbRented, double price, int ageRequired) {
 		this.id = id;
@@ -54,7 +57,6 @@ public class Vehicle implements Serializable{
 	public int getAgeRequired() {
 		return ageRequired;
 	}
-
 
 	@Override
 	public String toString() {
