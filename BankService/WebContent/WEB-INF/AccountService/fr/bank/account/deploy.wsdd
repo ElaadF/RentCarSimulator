@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from AccountService WSDL service -->
+
+  <service name="Account" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://account.bank.fr"/>
+      <parameter name="wsdlServiceElement" value="AccountService"/>
+      <parameter name="schemaQualified" value="http://account.bank.fr"/>
+      <parameter name="wsdlServicePort" value="Account"/>
+      <parameter name="className" value="fr.bank.account.Account"/>
+      <parameter name="wsdlPortType" value="Account"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://account.bank.fr" name="deposit" qname="operNS:deposit" soapAction="">
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:amount" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://account.bank.fr" xmlns:retNS="http://account.bank.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="withdrawal" qname="operNS:withdrawal" returnQName="retNS:withdrawalReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:amount" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://account.bank.fr" xmlns:retNS="http://account.bank.fr" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="accountBalance" qname="operNS:accountBalance" returnQName="retNS:accountBalanceReturn" returnType="rtns:double" soapAction="">
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+      </operation>
+      <operation xmlns:operNS="http://account.bank.fr" name="createAccount" qname="operNS:createAccount" soapAction="">
+        <parameter xmlns:pns="http://account.bank.fr" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:idClient" type="tns:long"/>
+      </operation>
+      <parameter name="allowedMethods" value="deposit withdrawal createAccount accountBalance"/>
+
+  </service>
+</deployment>

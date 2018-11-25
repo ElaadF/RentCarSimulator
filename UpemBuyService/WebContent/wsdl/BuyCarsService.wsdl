@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://manage.upem.fr" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://manage.upem.fr" xmlns:intf="http://manage.upem.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://manage.upem.fr" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="buy">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="currency" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="buyResponse">
+    <complexType>
+     <sequence>
+      <element name="buyReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="showByModels">
+    <complexType>
+     <sequence>
+      <element name="model" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="showByModelsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="showByModelsReturn" type="impl:Vehicle"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="Vehicle">
+    <sequence>
+     <element name="ageRequired" type="xsd:int"/>
+     <element name="brand" nillable="true" type="xsd:string"/>
+     <element name="buyPrice" type="xsd:double"/>
+     <element name="id" type="xsd:long"/>
+     <element name="model" nillable="true" type="xsd:string"/>
+     <element name="nbRented" type="xsd:int"/>
+     <element name="rentPrice" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <element name="addToCart">
+    <complexType>
+     <sequence>
+      <element name="idVehicle" type="xsd:long"/>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addToCartResponse">
+    <complexType>
+     <sequence>
+      <element name="addToCartReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPriceByCurrency">
+    <complexType>
+     <sequence>
+      <element name="currency" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getPriceByCurrencyResponse">
+    <complexType>
+     <sequence>
+      <element name="getPriceByCurrencyReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeFromCart">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="idVehicle" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="removeFromCartResponse">
+    <complexType/>
+   </element>
+   <element name="showByBrand">
+    <complexType>
+     <sequence>
+      <element name="brand" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="showByBrandResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="showByBrandReturn" type="impl:Vehicle"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="addToCartRequest">
+
+      <wsdl:part element="impl:addToCart" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeFromCartRequest">
+
+      <wsdl:part element="impl:removeFromCart" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="showByBrandResponse">
+
+      <wsdl:part element="impl:showByBrandResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="showByModelsResponse">
+
+      <wsdl:part element="impl:showByModelsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="showByBrandRequest">
+
+      <wsdl:part element="impl:showByBrand" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="addToCartResponse">
+
+      <wsdl:part element="impl:addToCartResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="buyRequest">
+
+      <wsdl:part element="impl:buy" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="buyResponse">
+
+      <wsdl:part element="impl:buyResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPriceByCurrencyResponse">
+
+      <wsdl:part element="impl:getPriceByCurrencyResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getPriceByCurrencyRequest">
+
+      <wsdl:part element="impl:getPriceByCurrency" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="showByModelsRequest">
+
+      <wsdl:part element="impl:showByModels" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeFromCartResponse">
+
+      <wsdl:part element="impl:removeFromCartResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="BuyCarsService">
+
+      <wsdl:operation name="buy">
+
+         <wsdl:input message="impl:buyRequest" name="buyRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:buyResponse" name="buyResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showByModels">
+
+         <wsdl:input message="impl:showByModelsRequest" name="showByModelsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:showByModelsResponse" name="showByModelsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToCart">
+
+         <wsdl:input message="impl:addToCartRequest" name="addToCartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:addToCartResponse" name="addToCartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPriceByCurrency">
+
+         <wsdl:input message="impl:getPriceByCurrencyRequest" name="getPriceByCurrencyRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getPriceByCurrencyResponse" name="getPriceByCurrencyResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeFromCart">
+
+         <wsdl:input message="impl:removeFromCartRequest" name="removeFromCartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:removeFromCartResponse" name="removeFromCartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showByBrand">
+
+         <wsdl:input message="impl:showByBrandRequest" name="showByBrandRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:showByBrandResponse" name="showByBrandResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BuyCarsServiceSoapBinding" type="impl:BuyCarsService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="buy">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="buyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="buyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showByModels">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="showByModelsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="showByModelsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addToCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addToCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getPriceByCurrency">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getPriceByCurrencyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getPriceByCurrencyResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="removeFromCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="removeFromCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="removeFromCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showByBrand">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="showByBrandRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="showByBrandResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BuyCarsServiceService">
+
+      <wsdl:port binding="impl:BuyCarsServiceSoapBinding" name="BuyCarsService">
+
+         <wsdlsoap:address location="http://localhost:8080/UpemBuyService/services/BuyCarsService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

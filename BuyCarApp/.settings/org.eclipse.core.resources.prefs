@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/fr/bank/account/Account.java=UTF-8
+encoding//src/fr/bank/account/AccountService.java=UTF-8
+encoding//src/fr/bank/account/AccountServiceLocator.java=UTF-8
+encoding//src/fr/bank/account/AccountSoapBindingStub.java=UTF-8
+encoding//src/fr/upem/manage/BuyCarsService.java=UTF-8
+encoding//src/fr/upem/manage/BuyCarsServiceService.java=UTF-8
+encoding//src/fr/upem/manage/BuyCarsServiceServiceLocator.java=UTF-8
+encoding//src/fr/upem/manage/BuyCarsServiceSoapBindingStub.java=UTF-8
+encoding//src/fr/upem/manage/Vehicle.java=UTF-8

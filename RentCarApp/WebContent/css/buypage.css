@@ -1,0 +1,40 @@
+body {
+	background-color: #FCFCFF;
+	height: 100%;
+	width: 100%;
+}
+
+.uk-card {
+	/* e9e9ec 
+	#FCFCFF*/
+	background-color: #FCFCFF;
+	position: relative;
+	top: 60px;
+	left: 50px;
+	margin-top: 40px;
+	width: 550px;
+}
+.liste {
+	float: left;
+}
+
+.reviews {
+	float: left;
+	width : 550px;
+	position: relative;
+	top: 60px;
+	left: 50px;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+.uk-card-badge-dispo {
+	background-color : #2ed298;
+}
+.uk-card-badge-buy {
+	background-color : #f14f6d;
+}
+
+.uk-card-badge-loue {
+	background-color : #fb9f60;
+}
