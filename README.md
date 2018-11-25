@@ -6,7 +6,7 @@ Master 2 Logiciel
 
 Binôme :
 + BONIN Olivier
-+ BOHORODYCZ Raphael
++ BOHORODYCZ Raphaël
 + FURREEDAN Elaad
 
 lien du projet : http://mahdi.zargayouna.free.fr/MLV/Projet2019
