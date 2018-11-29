@@ -56,16 +56,34 @@ public class BuyCarsServiceProxy implements fr.upem.manage.BuyCarsService {
     return buyCarsService.getPriceByCurrency(currency);
   }
   
-  public fr.upem.manage.Vehicle[] showByModels(java.lang.String model) throws java.rmi.RemoteException{
+  public fr.upem.manage.Review[] showReviewsById(long idVehicle) throws java.rmi.RemoteException{
     if (buyCarsService == null)
       _initBuyCarsServiceProxy();
-    return buyCarsService.showByModels(model);
+    return buyCarsService.showReviewsById(idVehicle);
   }
   
   public fr.upem.manage.Vehicle[] showByBrand(java.lang.String brand) throws java.rmi.RemoteException{
     if (buyCarsService == null)
       _initBuyCarsServiceProxy();
     return buyCarsService.showByBrand(brand);
+  }
+  
+  public fr.upem.manage.Vehicle[] showByModels(java.lang.String model) throws java.rmi.RemoteException{
+    if (buyCarsService == null)
+      _initBuyCarsServiceProxy();
+    return buyCarsService.showByModels(model);
+  }
+  
+  public fr.upem.manage.Vehicle[] getCartContent(long idClient) throws java.rmi.RemoteException{
+    if (buyCarsService == null)
+      _initBuyCarsServiceProxy();
+    return buyCarsService.getCartContent(idClient);
+  }
+  
+  public fr.upem.manage.Vehicle[] showVehicles() throws java.rmi.RemoteException{
+    if (buyCarsService == null)
+      _initBuyCarsServiceProxy();
+    return buyCarsService.showVehicles();
   }
   
   public boolean addToCart(long idVehicle, long idClient) throws java.rmi.RemoteException{

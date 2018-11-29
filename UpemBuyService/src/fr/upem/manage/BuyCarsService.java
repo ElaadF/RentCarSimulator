@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.xml.rpc.ServiceException;
 
@@ -20,23 +21,34 @@ import fr.bank.account.AccountServiceLocator;
 import fr.bank.account.AccountSoapBindingStub;
 
 public class BuyCarsService {
-	private HashMap<Long, List<Vehicle>> carts = new HashMap<>();
-	private IVehicleDeposit deposit;
-	private double price;
+	public HashMap<Long, List<Vehicle>> carts = new HashMap<>();
+	public double price;
+	
+	public BuyCarsService() {
+	}
 
-	public void removeFromCart(long idClient, long idVehicle) {	
+	public Vehicle[] getCartContent(long idClient) throws RemoteException, NullPointerException{
+		List<Vehicle> c = carts.get(idClient);
+		int i=0;
+		Vehicle[] v = new Vehicle[c.size()];
+		for (Vehicle vehicle : c) {
+			v[i] = vehicle;
+			i++;
+		}
+		return v;
+	}
+	
+	public void removeFromCart(long idClient, long idVehicle) throws NullPointerException {	
 		List<Vehicle> newVehicles = carts.get(idClient);
 		for (Vehicle vehicle : newVehicles) {
 			if(vehicle.getId() == idVehicle)
+				this.price = this.price - vehicle.getBuyPrice();
 				newVehicles.remove(vehicle);
+				
 		}
 		carts.replace(idClient, newVehicles);
 
 	}
-
-	public BuyCarsService() {
-	}
-
 
 	public double getPriceByCurrency(String currency) {
 		ConverterSoap converter;
@@ -56,60 +68,45 @@ public class BuyCarsService {
 		((AccountSoapBindingStub)service).setMaintainSession(true);
 		System.out.println("BuyCars - fonction buy : " + carts);
 		List<Vehicle> Vehicles = carts.get(idClient);
-		deposit = (IVehicleDeposit) Naming.lookup("vehicleDeposit");
-
-
+		
+		if(this.price == 0)
+			return false;
+		
 		if(service.withdrawal(idClient, price)) {
 			for (Vehicle vehicle : Vehicles) {
-				deposit.removeVehicle(vehicle.getId());				
+				System.out.println(vehicle.toString());
+				((IVehicleDeposit) Naming.lookup("vehicleDeposit")).removeVehicle(vehicle.getId());				
 			}
+			this.price = 0;
+			carts.get(idClient).clear();
 			return true;
 		}
 
 		return false;
 	}
-
-	public  Vehicle[] showByModels(String model) throws RemoteException, MalformedURLException, NotBoundException {
-		deposit = (IVehicleDeposit) Naming.lookup("vehicleDeposit");
-		List<Vehicle> vehicles = deposit.searchByBrand(model);
-		Vehicle[] v = new Vehicle[vehicles.size()];
-		for(int i =0; i< vehicles.size(); i++) {
-			v[i] = vehicles.get(i);
-		}
-		return v;
+	
+	public  Vehicle[] showVehicles() throws RemoteException, MalformedURLException, NotBoundException {
+		return ((IVehicleDeposit) Naming.lookup("vehicleDeposit")).getVehicles();
 	}
 
-	public  Review[] showReviewsById(long idVehicle) throws RemoteException, MalformedURLException, NotBoundException {
-		deposit = (IVehicleDeposit) Naming.lookup("vehicleDeposit");
+	public  Vehicle[] showByModels(String model) throws RemoteException, MalformedURLException, NotBoundException {
+		return ((IVehicleDeposit) Naming.lookup("vehicleDeposit")).searchByModel(model);
+	}
 
-		List<Review> reviews = deposit.getReviewsById(idVehicle);
-		Review[] r = new Review[reviews.size()];
-		for(int i =0; i< reviews.size(); i++) {
-			r[i] = reviews.get(i);
-		}
-		return r;
+	public  Review[] showReviewsById(long idVehicle) throws RemoteException, MalformedURLException, NotBoundException, NullPointerException {
+		return ((IVehicleDeposit) Naming.lookup("vehicleDeposit")).getReviewsById(idVehicle);
 	}
 	
 	public  Vehicle[] showByBrand(String brand) throws RemoteException, MalformedURLException, NotBoundException {
-		deposit = (IVehicleDeposit) Naming.lookup("vehicleDeposit");
-
-		List<Vehicle> vehicles = deposit.searchByBrand(brand);
-		Vehicle[] v = new Vehicle[vehicles.size()];
-		for(int i =0; i< vehicles.size(); i++) {
-			v[i] = vehicles.get(i);
-		}
-		return v;
+		return ((IVehicleDeposit) Naming.lookup("vehicleDeposit")).searchByModel(brand);
 	}
 
-	public boolean addToCart(long idVehicle, long idClient) throws MalformedURLException, RemoteException, NotBoundException {
-		deposit = (IVehicleDeposit) Naming.lookup("vehicleDeposit");
-		if (deposit.isBuyable(idVehicle)){
+	public boolean addToCart(long idVehicle, long idClient) throws NullPointerException, MalformedURLException, RemoteException, NotBoundException {
+		if (((IVehicleDeposit) Naming.lookup("vehicleDeposit")).isBuyable(idVehicle)){
 			List<Vehicle> a = carts.putIfAbsent(idClient, new ArrayList<>());
-			carts.get(idClient).add(deposit.getVehicleById(idVehicle));
-			price = price + deposit.getVehicleById(idVehicle).getBuyPrice();
+			carts.get(idClient).add(((IVehicleDeposit) Naming.lookup("vehicleDeposit")).getVehicleById(idVehicle));
+			price = price + ((IVehicleDeposit) Naming.lookup("vehicleDeposit")).getVehicleById(idVehicle).getBuyPrice();
 			System.out.println("BuyCars - fonction add : " + carts);
-			if(a==null)
-				return false;
 			return true;
 		}
 		return false;

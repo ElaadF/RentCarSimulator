@@ -3,7 +3,7 @@
   <ns1:parameter name="sendMultiRefs" value="true"/>
   <ns1:parameter name="disablePrettyXML" value="true"/>
   <ns1:parameter name="adminPassword" value="admin"/>
-  <ns1:parameter name="attachments.Directory" value="/home/elaad/workp/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/BankService/WEB-INF/attachments"/>
+  <ns1:parameter name="attachments.Directory" value="/home/raphael/eclipse-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/BankService/WEB-INF/attachments"/>
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
@@ -23,21 +23,21 @@
  <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
  <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
  <ns1:service name="Account" provider="java:RPC" style="wrapped" use="literal">
-  <ns2:operation name="accountBalance" qname="ns1:accountBalance" returnQName="ns1:accountBalanceReturn" returnType="xsd:double" soapAction="" xmlns:ns1="http://account.bank.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
-   <ns2:parameter qname="ns1:idClient" type="xsd:long"/>
+  <ns2:operation name="deposit" qname="ns1:deposit" soapAction="" xmlns:ns1="http://account.bank.fr" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns2:parameter qname="ns1:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns2:operation>
-  <ns1:operation name="createAccount" qname="ns2:createAccount" soapAction="" xmlns:ns2="http://account.bank.fr">
-   <ns1:parameter qname="ns2:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="withdrawal" qname="ns2:withdrawal" returnQName="ns2:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns2="http://account.bank.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns2:idClient" type="xsd:long"/>
+   <ns1:parameter qname="ns2:amount" type="xsd:double"/>
   </ns1:operation>
-  <ns1:operation name="deposit" qname="ns3:deposit" soapAction="" xmlns:ns3="http://account.bank.fr">
-   <ns1:parameter qname="ns3:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-   <ns1:parameter qname="ns3:amount" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:operation name="accountBalance" qname="ns3:accountBalance" returnQName="ns3:accountBalanceReturn" returnType="xsd:double" soapAction="" xmlns:ns3="http://account.bank.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:idClient" type="xsd:long"/>
   </ns1:operation>
-  <ns1:operation name="withdrawal" qname="ns4:withdrawal" returnQName="ns4:withdrawalReturn" returnType="xsd:boolean" soapAction="" xmlns:ns4="http://account.bank.fr" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns4:idClient" type="xsd:long"/>
-   <ns1:parameter qname="ns4:amount" type="xsd:double"/>
+  <ns1:operation name="createAccount" qname="ns4:createAccount" soapAction="" xmlns:ns4="http://account.bank.fr">
+   <ns1:parameter qname="ns4:idClient" type="xsd:long" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   </ns1:operation>
-  <ns1:parameter name="allowedMethods" value="deposit createAccount withdrawal accountBalance"/>
+  <ns1:parameter name="allowedMethods" value="deposit withdrawal createAccount accountBalance"/>
   <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="Account"/>
   <ns1:parameter name="className" value="fr.bank.account.Account"/>
@@ -45,7 +45,7 @@
   <ns1:parameter name="schemaQualified" value="http://account.bank.fr"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://account.bank.fr"/>
   <ns1:parameter name="wsdlServiceElement" value="AccountService"/>
-  <parameter name="scope" value="application"/>
+  <ns1:parameter name="scope" value="application"/>
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>

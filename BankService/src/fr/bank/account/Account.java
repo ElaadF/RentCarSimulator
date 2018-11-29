@@ -11,8 +11,9 @@ public class Account {
 	}
 	
 	public void deposit(long idClient, double amount) {
-		System.out.println("bank depo : " + clients);
+		//System.out.println("bank depo : " + clients);
 		clients.put(idClient, clients.get(idClient) + amount);
+		System.out.println("bank depo : " + clients);
 	}
 	
 	public boolean withdrawal(long idClient, double amount) {

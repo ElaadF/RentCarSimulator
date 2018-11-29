@@ -8,8 +8,8 @@
 package fr.bank.account;
 
 public interface Account extends java.rmi.Remote {
-    public double accountBalance(long idClient) throws java.rmi.RemoteException;
-    public void createAccount(long idClient) throws java.rmi.RemoteException;
     public void deposit(long idClient, double amount) throws java.rmi.RemoteException;
     public boolean withdrawal(long idClient, double amount) throws java.rmi.RemoteException;
+    public double accountBalance(long idClient) throws java.rmi.RemoteException;
+    public void createAccount(long idClient) throws java.rmi.RemoteException;
 }

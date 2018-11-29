@@ -59,65 +59,49 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    <wsdl:message name="accountBalanceRequest">
 
-      <wsdl:part element="impl:accountBalance" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:accountBalance" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="accountBalanceResponse">
 
-      <wsdl:part element="impl:accountBalanceResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:accountBalanceResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="depositRequest">
 
-      <wsdl:part element="impl:deposit" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:deposit" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="createAccountRequest">
 
-      <wsdl:part element="impl:createAccount" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:createAccount" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="depositResponse">
 
-      <wsdl:part element="impl:depositResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:depositResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="withdrawalRequest">
 
-      <wsdl:part element="impl:withdrawal" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:withdrawal" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="withdrawalResponse">
 
-      <wsdl:part element="impl:withdrawalResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:withdrawalResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="createAccountResponse">
 
-      <wsdl:part element="impl:createAccountResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:createAccountResponse" name="parameters"/>
 
    </wsdl:message>
 
@@ -125,49 +109,33 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:operation name="deposit">
 
-         <wsdl:input message="impl:depositRequest" name="depositRequest">
+         <wsdl:input message="impl:depositRequest" name="depositRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:depositResponse" name="depositResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:depositResponse" name="depositResponse"/>
 
       </wsdl:operation>
 
       <wsdl:operation name="withdrawal">
 
-         <wsdl:input message="impl:withdrawalRequest" name="withdrawalRequest">
+         <wsdl:input message="impl:withdrawalRequest" name="withdrawalRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:withdrawalResponse" name="withdrawalResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:withdrawalResponse" name="withdrawalResponse"/>
 
       </wsdl:operation>
 
       <wsdl:operation name="accountBalance">
 
-         <wsdl:input message="impl:accountBalanceRequest" name="accountBalanceRequest">
+         <wsdl:input message="impl:accountBalanceRequest" name="accountBalanceRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:accountBalanceResponse" name="accountBalanceResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:accountBalanceResponse" name="accountBalanceResponse"/>
 
       </wsdl:operation>
 
       <wsdl:operation name="createAccount">
 
-         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest">
+         <wsdl:input message="impl:createAccountRequest" name="createAccountRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:createAccountResponse" name="createAccountResponse"/>
 
       </wsdl:operation>
 

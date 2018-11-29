@@ -20,33 +20,49 @@
       <parameter name="className" value="fr.upem.manage.BuyCarsServiceSoapBindingImpl"/>
       <parameter name="wsdlPortType" value="BuyCarsService"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="buy" qname="operNS:buy" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:buyReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      <operation name="removeFromCart" qname="operNS:removeFromCart" xmlns:operNS="http://manage.upem.fr" soapAction="" >
         <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:currency" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="showByModels" qname="operNS:showByModels" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:showByModelsReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Vehicle" xmlns:rtns="http://manage.upem.fr" soapAction="" >
-        <parameter qname="pns:model" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-      </operation>
-      <operation name="addToCart" qname="operNS:addToCart" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:addToCartReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:idVehicle" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
-        <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <operation name="getPriceByCurrency" qname="operNS:getPriceByCurrency" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:getPriceByCurrencyReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:double" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
         <parameter qname="pns:currency" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <operation name="removeFromCart" qname="operNS:removeFromCart" xmlns:operNS="http://manage.upem.fr" soapAction="" >
-        <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      <operation name="showReviewsById" qname="operNS:showReviewsById" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:showReviewsByIdReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Review" xmlns:rtns="http://manage.upem.fr" soapAction="" >
         <parameter qname="pns:idVehicle" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
       <operation name="showByBrand" qname="operNS:showByBrand" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:showByBrandReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Vehicle" xmlns:rtns="http://manage.upem.fr" soapAction="" >
         <parameter qname="pns:brand" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
       </operation>
-      <parameter name="allowedMethods" value="removeFromCart showByModels showByBrand getPriceByCurrency buy addToCart"/>
+      <operation name="showByModels" qname="operNS:showByModels" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:showByModelsReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Vehicle" xmlns:rtns="http://manage.upem.fr" soapAction="" >
+        <parameter qname="pns:model" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getCartContent" qname="operNS:getCartContent" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:getCartContentReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Vehicle" xmlns:rtns="http://manage.upem.fr" soapAction="" >
+        <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="showVehicles" qname="operNS:showVehicles" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:showVehiclesReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:Vehicle" xmlns:rtns="http://manage.upem.fr" soapAction="" >
+      </operation>
+      <operation name="addToCart" qname="operNS:addToCart" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:addToCartReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:idVehicle" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="buy" qname="operNS:buy" xmlns:operNS="http://manage.upem.fr" returnQName="retNS:buyReturn" xmlns:retNS="http://manage.upem.fr" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:idClient" xmlns:pns="http://manage.upem.fr" type="tns:long" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:currency" xmlns:pns="http://manage.upem.fr" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="removeFromCart showVehicles showByModels showByBrand getPriceByCurrency buy addToCart showReviewsById getCartContent"/>
 
       <typeMapping
         xmlns:ns="http://manage.upem.fr"
         qname="ns:Vehicle"
         type="java:fr.upem.manage.Vehicle"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://manage.upem.fr"
+        qname="ns:Review"
+        type="java:fr.upem.manage.Review"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle=""

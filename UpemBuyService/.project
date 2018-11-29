@@ -3,6 +3,7 @@
 	<name>UpemBuyService</name>
 	<comment></comment>
 	<projects>
+		<project>BuyCarApp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

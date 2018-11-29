@@ -7,17 +7,17 @@ import java.util.List;
 
 public interface IVehicleDeposit extends Remote{
 
-	public List<Vehicle> searchByModel(String model) throws RemoteException;
+	public Vehicle[] searchByModel(String model) throws RemoteException;
 
-	public List<Vehicle> searchByBrand(String brand) throws RemoteException;
+	public Vehicle[] searchByBrand(String brand) throws RemoteException;
 	
-	public void render(long idVehicle, IClient client) throws RemoteException;
+	public void render(long idVehicle, long idClient) throws RemoteException;
 	
-	public void render(long idVehicle, IClient client, short mark, String comment) throws RemoteException;
+	public void render(long idVehicle, long idClient, short mark, String comment) throws RemoteException;
 	
 	public void add(long id, String model, String brand, int nbRented, double buyPrice, double rentPrice, int ageRequired) throws RemoteException;
 
-	public void rent(long idVehicle, IClient client) throws RemoteException;
+	public boolean rent(long idVehicle, long idClient) throws RemoteException;
 
 	public boolean isBuyable(long idVehicle) throws RemoteException;
 	
@@ -25,5 +25,7 @@ public interface IVehicleDeposit extends Remote{
 	
 	public void removeVehicle(long idVehicle) throws RemoteException;
 	
-	public List<Review> getReviewsById(long idVehicle) throws RemoteException;
+	public Review[] getReviewsById(long idVehicle) throws RemoteException;
+
+	public Vehicle[] getVehicles() throws RemoteException;
 }

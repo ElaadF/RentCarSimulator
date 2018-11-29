@@ -13,4 +13,9 @@ public interface Converter extends javax.xml.rpc.Service {
     public org.tempuri.ConverterSoap getConverterSoap() throws javax.xml.rpc.ServiceException;
 
     public org.tempuri.ConverterSoap getConverterSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public java.lang.String getConverterSoap12Address();
+
+    public org.tempuri.ConverterSoap getConverterSoap12() throws javax.xml.rpc.ServiceException;
+
+    public org.tempuri.ConverterSoap getConverterSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 }

@@ -105,7 +105,7 @@ public class BuyCarsServiceServiceLocator extends org.apache.axis.client.Service
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://buy.upem.fr", "BuyCarsServiceService");
+        return new javax.xml.namespace.QName("http://manage.upem.fr", "BuyCarsServiceService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class BuyCarsServiceServiceLocator extends org.apache.axis.client.Service
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://buy.upem.fr", "BuyCarsService"));
+            ports.add(new javax.xml.namespace.QName("http://manage.upem.fr", "BuyCarsService"));
         }
         return ports.iterator();
     }

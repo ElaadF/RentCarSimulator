@@ -65,16 +65,68 @@ public class ConverterLocator extends org.apache.axis.client.Service implements 
         ConverterSoap_address = address;
     }
 
+
+    // Use to get a proxy class for ConverterSoap12
+    private java.lang.String ConverterSoap12_address = "http://currencyconverter.kowabunga.net/converter.asmx";
+
+    public java.lang.String getConverterSoap12Address() {
+        return ConverterSoap12_address;
+    }
+
+    // The WSDD service name defaults to the port name.
+    private java.lang.String ConverterSoap12WSDDServiceName = "ConverterSoap12";
+
+    public java.lang.String getConverterSoap12WSDDServiceName() {
+        return ConverterSoap12WSDDServiceName;
+    }
+
+    public void setConverterSoap12WSDDServiceName(java.lang.String name) {
+        ConverterSoap12WSDDServiceName = name;
+    }
+
+    public org.tempuri.ConverterSoap getConverterSoap12() throws javax.xml.rpc.ServiceException {
+       java.net.URL endpoint;
+        try {
+            endpoint = new java.net.URL(ConverterSoap12_address);
+        }
+        catch (java.net.MalformedURLException e) {
+            throw new javax.xml.rpc.ServiceException(e);
+        }
+        return getConverterSoap12(endpoint);
+    }
+
+    public org.tempuri.ConverterSoap getConverterSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+        try {
+            org.tempuri.ConverterSoap12Stub _stub = new org.tempuri.ConverterSoap12Stub(portAddress, this);
+            _stub.setPortName(getConverterSoap12WSDDServiceName());
+            return _stub;
+        }
+        catch (org.apache.axis.AxisFault e) {
+            return null;
+        }
+    }
+
+    public void setConverterSoap12EndpointAddress(java.lang.String address) {
+        ConverterSoap12_address = address;
+    }
+
     /**
      * For the given interface, get the stub implementation.
      * If this service has no port for the given interface,
      * then ServiceException is thrown.
+     * This service has multiple ports for a given interface;
+     * the proxy implementation returned may be indeterminate.
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
             if (org.tempuri.ConverterSoap.class.isAssignableFrom(serviceEndpointInterface)) {
                 org.tempuri.ConverterSoapStub _stub = new org.tempuri.ConverterSoapStub(new java.net.URL(ConverterSoap_address), this);
                 _stub.setPortName(getConverterSoapWSDDServiceName());
+                return _stub;
+            }
+            if (org.tempuri.ConverterSoap.class.isAssignableFrom(serviceEndpointInterface)) {
+                org.tempuri.ConverterSoap12Stub _stub = new org.tempuri.ConverterSoap12Stub(new java.net.URL(ConverterSoap12_address), this);
+                _stub.setPortName(getConverterSoap12WSDDServiceName());
                 return _stub;
             }
         }
@@ -97,6 +149,9 @@ public class ConverterLocator extends org.apache.axis.client.Service implements 
         if ("ConverterSoap".equals(inputPortName)) {
             return getConverterSoap();
         }
+        else if ("ConverterSoap12".equals(inputPortName)) {
+            return getConverterSoap12();
+        }
         else  {
             java.rmi.Remote _stub = getPort(serviceEndpointInterface);
             ((org.apache.axis.client.Stub) _stub).setPortName(portName);
@@ -114,6 +169,7 @@ public class ConverterLocator extends org.apache.axis.client.Service implements 
         if (ports == null) {
             ports = new java.util.HashSet();
             ports.add(new javax.xml.namespace.QName("http://tempuri.org/", "ConverterSoap"));
+            ports.add(new javax.xml.namespace.QName("http://tempuri.org/", "ConverterSoap12"));
         }
         return ports.iterator();
     }
@@ -125,6 +181,10 @@ public class ConverterLocator extends org.apache.axis.client.Service implements 
         
 if ("ConverterSoap".equals(portName)) {
             setConverterSoapEndpointAddress(address);
+        }
+        else 
+if ("ConverterSoap12".equals(portName)) {
+            setConverterSoap12EndpointAddress(address);
         }
         else 
 { // Unknown Port Name

@@ -44,18 +44,6 @@ public class AccountProxy implements fr.bank.account.Account {
     return account;
   }
   
-  public double accountBalance(long idClient) throws java.rmi.RemoteException{
-    if (account == null)
-      _initAccountProxy();
-    return account.accountBalance(idClient);
-  }
-  
-  public void createAccount(long idClient) throws java.rmi.RemoteException{
-    if (account == null)
-      _initAccountProxy();
-    account.createAccount(idClient);
-  }
-  
   public void deposit(long idClient, double amount) throws java.rmi.RemoteException{
     if (account == null)
       _initAccountProxy();
@@ -66,6 +54,18 @@ public class AccountProxy implements fr.bank.account.Account {
     if (account == null)
       _initAccountProxy();
     return account.withdrawal(idClient, amount);
+  }
+  
+  public double accountBalance(long idClient) throws java.rmi.RemoteException{
+    if (account == null)
+      _initAccountProxy();
+    return account.accountBalance(idClient);
+  }
+  
+  public void createAccount(long idClient) throws java.rmi.RemoteException{
+    if (account == null)
+      _initAccountProxy();
+    account.createAccount(idClient);
   }
   
   

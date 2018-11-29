@@ -13,8 +13,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class VehicleDeposit extends UnicastRemoteObject implements IVehicleDeposit{
 
 
-	private HashMap<Long, BlockingQueue<IClient>> deposit = new HashMap<>();
+	private HashMap<Long, BlockingQueue<Long>> deposit = new HashMap<>();
 	private HashMap<Long, Vehicle> vehicles = new HashMap<>();
+	private List<Long> currentClient = new ArrayList<>();
 	
 	private HashMap<Long, List<Review>> reviews = new HashMap<>();
 
@@ -23,7 +24,7 @@ public class VehicleDeposit extends UnicastRemoteObject implements IVehicleDepos
 	}
 	
 	public boolean isBuyable(long idVehicle) {
-		return vehicles.get(idVehicle).getNbRented() > 0 && deposit.get(idVehicle).isEmpty();
+		return vehicles.get(idVehicle).getNbRented() >= 0 && deposit.get(idVehicle).isEmpty();
 	}
 
 	public Vehicle getVehicleById(long idVehicle) {
@@ -36,26 +37,28 @@ public class VehicleDeposit extends UnicastRemoteObject implements IVehicleDepos
 	}
 	
 	@Override
-	public void render(long idVehicle, IClient client, short mark, String comment) throws RemoteException {
+	public void render(long idVehicle, long idClient, short mark, String comment) throws RemoteException {
 
-		IClient tmp = deposit.get(idVehicle).peek();
-		if (tmp.equals(client)) {
+		long tmp = deposit.get(idVehicle).peek();
+		if (tmp == idClient) {
 			try {
+				currentClient.remove(idClient);
 				deposit.get(idVehicle).take();
 				vehicles.get(idVehicle).setNbRented(vehicles.get(idVehicle).getNbRented() + 1);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			reviews.get(idVehicle).add(new Review(client, idVehicle, mark, comment));
+			reviews.get(idVehicle).add(new Review(idClient, idVehicle, mark, comment));
 		}
 	}
 
 	@Override
-	public void render(long idVehicle, IClient client) throws RemoteException {
+	public void render(long idVehicle, long idClient) throws RemoteException {
 
-		IClient tmp = deposit.get(idVehicle).peek();
-		if (tmp.equals(client)) {
+		long tmp = deposit.get(idVehicle).peek();
+		if (tmp == idClient) {
 			try {
+				currentClient.remove(idClient);
 				deposit.get(idVehicle).take();
 				vehicles.get(idVehicle).setNbRented(vehicles.get(idVehicle).getNbRented() + 1);
 			} catch (InterruptedException e) {
@@ -73,42 +76,76 @@ public class VehicleDeposit extends UnicastRemoteObject implements IVehicleDepos
 	}
 
 	@Override
-	public void rent(long idVehicle, IClient client) throws RemoteException {
+	public boolean rent(long idVehicle, long idClient) throws RemoteException {
 		try {
-			deposit.get(idVehicle).put(client);
+			deposit.get(idVehicle).put(idClient);
+			if(!currentClient.contains(idClient)) {
+				currentClient.add(idClient);
+				return true;
+			}
+			else
+				return false;
+				
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
+	@Override
+	public Vehicle[] getVehicles() throws RemoteException {
+		Vehicle[] v = new Vehicle[vehicles.size()];
+		int i =0;
+		for (Entry <Long,Vehicle> entry : vehicles.entrySet()) {
+			Vehicle vehicle = entry.getValue();
+			v[i] = vehicle;
+			i++;
+		}
+		return v;
+	}
+	
 
 	@Override
-	public List<Vehicle> searchByBrand(String brand) throws RemoteException {
-		ArrayList<Vehicle> vehiclesTab = new ArrayList<>();
+	public Vehicle[] searchByBrand(String brand) throws RemoteException {
+		Vehicle[] v = new Vehicle[vehicles.size()];
+		int i =0;
 		for (Entry <Long,Vehicle> entry : vehicles.entrySet()) {
 			Vehicle vehicle = entry.getValue();
 			if (vehicle.getBrand().equals(brand)) {
-				vehiclesTab.add(vehicle);
+				v[i] = vehicle;
+				i++;
 			}			
 		}
-		return vehiclesTab;
+		return v;
 	}
 
 	@Override
-	public List<Vehicle> searchByModel(String model) throws RemoteException {
-		ArrayList<Vehicle> vehiclesTab = new ArrayList<>();
+	public Vehicle[] searchByModel(String model) throws RemoteException {
+		Vehicle[] v = new Vehicle[vehicles.size()];
+		int i =0;
 		for (Entry <Long,Vehicle> entry : vehicles.entrySet()) {
 			Vehicle vehicle = entry.getValue();
 			if (vehicle.getModel().equals(model)) {
-				vehiclesTab.add(vehicle);
+				v[i] = vehicle;
+				i++;
 			}			
 		}
-		return vehiclesTab;
+		return v;
 	}
 	
 	@Override
-	public List<Review> getReviewsById(long idVehicle) throws RemoteException {
-		return reviews.get(idVehicle);
+	public Review[] getReviewsById(long idVehicle) throws RemoteException {
+		for (Entry <Long,List<Review>> entry : reviews.entrySet()) {
+			List<Review> review = entry.getValue();
+			if(entry.getKey() == idVehicle) {
+				Review[] r = new Review[entry.getValue().size()];
+				for(int i=0; i < entry.getValue().size(); i++) {
+					r[i] = entry.getValue().get(i);	
+				}
+				return r;
+			}
+		}
+	return null;	
 	}
 
 }

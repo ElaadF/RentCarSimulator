@@ -4,60 +4,16 @@
 Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema elementFormDefault="qualified" targetNamespace="http://manage.upem.fr" xmlns="http://www.w3.org/2001/XMLSchema">
-   <element name="buy">
+   <element name="removeFromCart">
     <complexType>
      <sequence>
       <element name="idClient" type="xsd:long"/>
-      <element name="currency" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="buyResponse">
-    <complexType>
-     <sequence>
-      <element name="buyReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="showByModels">
-    <complexType>
-     <sequence>
-      <element name="model" type="xsd:string"/>
-     </sequence>
-    </complexType>
-   </element>
-   <element name="showByModelsResponse">
-    <complexType>
-     <sequence>
-      <element maxOccurs="unbounded" name="showByModelsReturn" type="impl:Vehicle"/>
-     </sequence>
-    </complexType>
-   </element>
-   <complexType name="Vehicle">
-    <sequence>
-     <element name="ageRequired" type="xsd:int"/>
-     <element name="brand" nillable="true" type="xsd:string"/>
-     <element name="buyPrice" type="xsd:double"/>
-     <element name="id" type="xsd:long"/>
-     <element name="model" nillable="true" type="xsd:string"/>
-     <element name="nbRented" type="xsd:int"/>
-     <element name="rentPrice" type="xsd:double"/>
-    </sequence>
-   </complexType>
-   <element name="addToCart">
-    <complexType>
-     <sequence>
       <element name="idVehicle" type="xsd:long"/>
-      <element name="idClient" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
-   <element name="addToCartResponse">
-    <complexType>
-     <sequence>
-      <element name="addToCartReturn" type="xsd:boolean"/>
-     </sequence>
-    </complexType>
+   <element name="removeFromCartResponse">
+    <complexType/>
    </element>
    <element name="getPriceByCurrency">
     <complexType>
@@ -73,17 +29,28 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
-   <element name="removeFromCart">
+   <element name="showReviewsById">
     <complexType>
      <sequence>
-      <element name="idClient" type="xsd:long"/>
       <element name="idVehicle" type="xsd:long"/>
      </sequence>
     </complexType>
    </element>
-   <element name="removeFromCartResponse">
-    <complexType/>
+   <element name="showReviewsByIdResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="showReviewsByIdReturn" type="impl:Review"/>
+     </sequence>
+    </complexType>
    </element>
+   <complexType name="Review">
+    <sequence>
+     <element name="client" type="xsd:long"/>
+     <element name="comment" nillable="true" type="xsd:string"/>
+     <element name="idVehicle" nillable="true" type="xsd:long"/>
+     <element name="mark" type="xsd:short"/>
+    </sequence>
+   </complexType>
    <element name="showByBrand">
     <complexType>
      <sequence>
@@ -98,176 +65,267 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </sequence>
     </complexType>
    </element>
+   <complexType name="Vehicle">
+    <sequence>
+     <element name="ageRequired" type="xsd:int"/>
+     <element name="brand" nillable="true" type="xsd:string"/>
+     <element name="buyPrice" type="xsd:double"/>
+     <element name="id" type="xsd:long"/>
+     <element name="model" nillable="true" type="xsd:string"/>
+     <element name="nbRented" type="xsd:int"/>
+     <element name="rentPrice" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <element name="showByModels">
+    <complexType>
+     <sequence>
+      <element name="model" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="showByModelsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="showByModelsReturn" type="impl:Vehicle"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCartContent">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getCartContentResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getCartContentReturn" type="impl:Vehicle"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="showVehicles">
+    <complexType/>
+   </element>
+   <element name="showVehiclesResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="showVehiclesReturn" type="impl:Vehicle"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addToCart">
+    <complexType>
+     <sequence>
+      <element name="idVehicle" type="xsd:long"/>
+      <element name="idClient" type="xsd:long"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="addToCartResponse">
+    <complexType>
+     <sequence>
+      <element name="addToCartReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="buy">
+    <complexType>
+     <sequence>
+      <element name="idClient" type="xsd:long"/>
+      <element name="currency" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="buyResponse">
+    <complexType>
+     <sequence>
+      <element name="buyReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="addToCartRequest">
-
-      <wsdl:part element="impl:addToCart" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="removeFromCartRequest">
-
-      <wsdl:part element="impl:removeFromCart" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
    <wsdl:message name="showByBrandResponse">
 
-      <wsdl:part element="impl:showByBrandResponse" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="showByModelsResponse">
-
-      <wsdl:part element="impl:showByModelsResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:showByBrandResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="showByBrandRequest">
 
-      <wsdl:part element="impl:showByBrand" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:showByBrand" name="parameters"/>
 
    </wsdl:message>
 
-   <wsdl:message name="addToCartResponse">
+   <wsdl:message name="showByModelsResponse">
 
-      <wsdl:part element="impl:addToCartResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:showByModelsResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="buyRequest">
 
-      <wsdl:part element="impl:buy" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:buy" name="parameters"/>
 
    </wsdl:message>
 
-   <wsdl:message name="buyResponse">
+   <wsdl:message name="getCartContentResponse">
 
-      <wsdl:part element="impl:buyResponse" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:getCartContentResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="getPriceByCurrencyResponse">
 
-      <wsdl:part element="impl:getPriceByCurrencyResponse" name="parameters">
+      <wsdl:part element="impl:getPriceByCurrencyResponse" name="parameters"/>
 
-      </wsdl:part>
+   </wsdl:message>
+
+   <wsdl:message name="addToCartRequest">
+
+      <wsdl:part element="impl:addToCart" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="removeFromCartRequest">
+
+      <wsdl:part element="impl:removeFromCart" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCartContentRequest">
+
+      <wsdl:part element="impl:getCartContent" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="showReviewsByIdRequest">
+
+      <wsdl:part element="impl:showReviewsById" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="addToCartResponse">
+
+      <wsdl:part element="impl:addToCartResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="buyResponse">
+
+      <wsdl:part element="impl:buyResponse" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="showReviewsByIdResponse">
+
+      <wsdl:part element="impl:showReviewsByIdResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="getPriceByCurrencyRequest">
 
-      <wsdl:part element="impl:getPriceByCurrency" name="parameters">
-
-      </wsdl:part>
-
-   </wsdl:message>
-
-   <wsdl:message name="showByModelsRequest">
-
-      <wsdl:part element="impl:showByModels" name="parameters">
-
-      </wsdl:part>
+      <wsdl:part element="impl:getPriceByCurrency" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:message name="removeFromCartResponse">
 
-      <wsdl:part element="impl:removeFromCartResponse" name="parameters">
+      <wsdl:part element="impl:removeFromCartResponse" name="parameters"/>
 
-      </wsdl:part>
+   </wsdl:message>
+
+   <wsdl:message name="showByModelsRequest">
+
+      <wsdl:part element="impl:showByModels" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="showVehiclesRequest">
+
+      <wsdl:part element="impl:showVehicles" name="parameters"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="showVehiclesResponse">
+
+      <wsdl:part element="impl:showVehiclesResponse" name="parameters"/>
 
    </wsdl:message>
 
    <wsdl:portType name="BuyCarsService">
 
-      <wsdl:operation name="buy">
+      <wsdl:operation name="removeFromCart">
 
-         <wsdl:input message="impl:buyRequest" name="buyRequest">
+         <wsdl:input message="impl:removeFromCartRequest" name="removeFromCartRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:buyResponse" name="buyResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="showByModels">
-
-         <wsdl:input message="impl:showByModelsRequest" name="showByModelsRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:showByModelsResponse" name="showByModelsResponse">
-
-       </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addToCart">
-
-         <wsdl:input message="impl:addToCartRequest" name="addToCartRequest">
-
-       </wsdl:input>
-
-         <wsdl:output message="impl:addToCartResponse" name="addToCartResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:removeFromCartResponse" name="removeFromCartResponse"/>
 
       </wsdl:operation>
 
       <wsdl:operation name="getPriceByCurrency">
 
-         <wsdl:input message="impl:getPriceByCurrencyRequest" name="getPriceByCurrencyRequest">
+         <wsdl:input message="impl:getPriceByCurrencyRequest" name="getPriceByCurrencyRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:getPriceByCurrencyResponse" name="getPriceByCurrencyResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:getPriceByCurrencyResponse" name="getPriceByCurrencyResponse"/>
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeFromCart">
+      <wsdl:operation name="showReviewsById">
 
-         <wsdl:input message="impl:removeFromCartRequest" name="removeFromCartRequest">
+         <wsdl:input message="impl:showReviewsByIdRequest" name="showReviewsByIdRequest"/>
 
-       </wsdl:input>
-
-         <wsdl:output message="impl:removeFromCartResponse" name="removeFromCartResponse">
-
-       </wsdl:output>
+         <wsdl:output message="impl:showReviewsByIdResponse" name="showReviewsByIdResponse"/>
 
       </wsdl:operation>
 
       <wsdl:operation name="showByBrand">
 
-         <wsdl:input message="impl:showByBrandRequest" name="showByBrandRequest">
+         <wsdl:input message="impl:showByBrandRequest" name="showByBrandRequest"/>
 
-       </wsdl:input>
+         <wsdl:output message="impl:showByBrandResponse" name="showByBrandResponse"/>
 
-         <wsdl:output message="impl:showByBrandResponse" name="showByBrandResponse">
+      </wsdl:operation>
 
-       </wsdl:output>
+      <wsdl:operation name="showByModels">
+
+         <wsdl:input message="impl:showByModelsRequest" name="showByModelsRequest"/>
+
+         <wsdl:output message="impl:showByModelsResponse" name="showByModelsResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCartContent">
+
+         <wsdl:input message="impl:getCartContentRequest" name="getCartContentRequest"/>
+
+         <wsdl:output message="impl:getCartContentResponse" name="getCartContentResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showVehicles">
+
+         <wsdl:input message="impl:showVehiclesRequest" name="showVehiclesRequest"/>
+
+         <wsdl:output message="impl:showVehiclesResponse" name="showVehiclesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToCart">
+
+         <wsdl:input message="impl:addToCartRequest" name="addToCartRequest"/>
+
+         <wsdl:output message="impl:addToCartResponse" name="addToCartResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="buy">
+
+         <wsdl:input message="impl:buyRequest" name="buyRequest"/>
+
+         <wsdl:output message="impl:buyResponse" name="buyResponse"/>
 
       </wsdl:operation>
 
@@ -277,53 +335,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation name="buy">
+      <wsdl:operation name="removeFromCart">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="buyRequest">
+         <wsdl:input name="removeFromCartRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="buyResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="showByModels">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="showByModelsRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="showByModelsResponse">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="addToCart">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="addToCartRequest">
-
-            <wsdlsoap:body use="literal"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="addToCartResponse">
+         <wsdl:output name="removeFromCartResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -349,17 +371,17 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="removeFromCart">
+      <wsdl:operation name="showReviewsById">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input name="removeFromCartRequest">
+         <wsdl:input name="showReviewsByIdRequest">
 
             <wsdlsoap:body use="literal"/>
 
          </wsdl:input>
 
-         <wsdl:output name="removeFromCartResponse">
+         <wsdl:output name="showReviewsByIdResponse">
 
             <wsdlsoap:body use="literal"/>
 
@@ -378,6 +400,96 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="showByBrandResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showByModels">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="showByModelsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="showByModelsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getCartContent">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getCartContentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getCartContentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="showVehicles">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="showVehiclesRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="showVehiclesResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="addToCart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="addToCartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="addToCartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="buy">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="buyRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="buyResponse">
 
             <wsdlsoap:body use="literal"/>
 

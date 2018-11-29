@@ -6,13 +6,13 @@ import java.io.Serializable;
 
 public class Vehicle implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private final long id;
-	private final String model;
-	private final String brand;
+	private long id;
+	private String model;
+	private String brand;
 	private int nbRented;
-	private final double buyPrice;
-	private final double rentPrice;
-	private final int ageRequired;
+	private double buyPrice;
+	private double rentPrice;
+	private int ageRequired;
 
 	public Vehicle(long id, String model, String brand, int nbRented, double buyPrice, double rentPrice, int ageRequired) {
 		this.id = id;

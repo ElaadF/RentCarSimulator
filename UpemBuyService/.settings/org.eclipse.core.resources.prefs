@@ -10,6 +10,7 @@ encoding//src/org/tempuri/ConvertDataTableColumnResponseDs.java=UTF-8
 encoding//src/org/tempuri/Converter.java=UTF-8
 encoding//src/org/tempuri/ConverterLocator.java=UTF-8
 encoding//src/org/tempuri/ConverterSoap.java=UTF-8
+encoding//src/org/tempuri/ConverterSoap12Stub.java=UTF-8
 encoding//src/org/tempuri/ConverterSoapStub.java=UTF-8
 encoding//src/org/tempuri/DataSet.java=UTF-8
 encoding//src/org/tempuri/GetConversionAmount.java=UTF-8
